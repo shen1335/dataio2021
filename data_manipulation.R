@@ -9,6 +9,8 @@ fact_receipts <- read_csv("data/fact_receipts.csv")
 fact_invoice_items <- read_csv("data/fact_invoice_items.csv")
 
 joined_items_data <- inner_join(dim_item_master, dim_items, by = c('mstr_item_id' = 'mstr_item_id'))
-
+df<-select(joined_items_data, -c(group_food, dummy_is_fresh, ranking, packaging, match_status, material_donation_status, name.x, dummy_is_fresh, name_fa_31_cat))
+unique(df$name_category)
+view(fact_invoice_items)
 joined_receipts_invoice <- inner_join(fact_receipts, fact_invoice_items, by = c('order_number' = 'order_number'))
 
